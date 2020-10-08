@@ -23,4 +23,50 @@ $(document).ready(function() {
             }
         });
     });
+    
+    
+    
+    // pagination numbers click event
+    $(document).on( 'click', '.pagination a', function( event ) {
+    
+        event.preventDefault();
+        var paged = $(this).attr('data-id');
+        var posts_per_page = jQuery(document).find('#posts_per_page').val();
+
+        jQuery.ajax({
+            type: "POST",
+            dataType: "json",
+            url: myChildAjax.ajaxurl,
+            data: {
+                'action': 'more_post_ajax',
+                'security': myChildAjax.ajax_nonce,
+                'paged': paged,
+                'posts_per_page': posts_per_page
+            },
+            success: function (data) {
+                
+                var $data = jQuery(data);
+                
+                if ($data.length) {
+                    jQuery("#ajax-posts").html(data.message);
+                }
+
+                var next_page_id = parseInt(paged) + 1;
+                if(paged > 0){
+                    var prev_page_id = parseInt(paged) - 1;
+                }else{
+                    var prev_page_id = 0;
+                }
+                
+                jQuery("#prev-post").attr('data-id',prev_page_id);
+                jQuery("#next-post").attr('data-id',next_page_id);
+                
+            }
+        });
+
+    });
+    
+    
+    
+    
 });
