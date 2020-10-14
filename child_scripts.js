@@ -94,12 +94,11 @@ $(document).ready(function() {
                     var prev_page_id = 0;
                 }
 
-                //jQuery("#prev-post").attr('data-id',prev_page_id);
+                
                 if(document.getElementsByClassName("prev-post")[0] != undefined){
                 	document.getElementsByClassName("prev-post")[0].setAttribute("data-id", prev_page_id);	
                 }
                 
-                //jQuery("#next-post").attr('data-id',next_page_id);
                 if(document.getElementsByClassName("next-post")[0] != undefined){
 	                document.getElementsByClassName("next-post")[0].setAttribute("data-id", next_page_id);
             	}
